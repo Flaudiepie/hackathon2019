@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon2019/drawer.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,17 +8,29 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primaryColor: Colors.black
+        primaryColor: Colors.red[500],
+        accentColor: Colors.white
       ),
-      title: 'Welcome to Flutter',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Welcome to Flutter'),
-        ),
-        body: Center(
-          child: Text('Hello World'),
-        ),
-      ),
+      title: 'Hackathon 2019',
+      home: WelcomeScreen()
     );
+  }
+}
+
+class WelcomeScreen extends StatefulWidget {
+  @override
+  _WelcomeScreenState createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: MyDrawer(),
+        appBar: AppBar(),
+        body: Center(
+          child: Text('Homepage'),
+        ),
+      );
   }
 }
