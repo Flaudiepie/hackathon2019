@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.white
       ),
       title: 'Hackathon 2019',
-      home: WelcomeScreen(),
+      home: InventoryMainScreen(),
       routes: {
-        '/inventory': (ctx) => InventoryMainScreen()
+        '/inventory': (ctx) => InventoryMainScreen(),
       },
     );
   }

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon2019/drawer.dart';
+import 'package:hackathon2019/inventoryItemTemplate.dart';
+import 'package:hackathon2019/model/dummy_data.dart';
 
 class InventoryMainScreen extends StatefulWidget {
   @override
@@ -9,8 +12,19 @@ class _InventoryMainScreenState extends State<InventoryMainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(child: Text("Dildo"),),
+      drawer: MyDrawer(),
+        appBar: AppBar(),
+        body:
+      GridView(
+      children: DUMMY_DATA.map(
+        (invData) => InventoryItem(invData.name)
+        ).toList(),
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 200,
+        childAspectRatio: 3 / 2,
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
+      ),
       ),
     );
   }
