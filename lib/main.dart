@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon2019/barcode_scanner.dart';
 import 'package:hackathon2019/drawer.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -23,6 +25,9 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+
+  String barcode = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +36,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         body: Center(
           child: Text('Homepage'),
         ),
+        floatingActionButton: ScanCodeButton(),
       );
   }
 }
