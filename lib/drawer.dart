@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon2019/inventory_screen.dart';
 
 class MyDrawer extends StatelessWidget {
 
-Widget buildListTile(String title, IconData icon){
+Widget buildListTile(String title, IconData icon, Function tabHandler){
   return ListTile(
               leading: Icon(icon, size: 28,),
               title: Text(title, style: TextStyle(
               fontSize: 24),
               ),
-              onTap: () { },
+              onTap: tabHandler,
               ); 
 }
 
@@ -32,7 +33,13 @@ Widget buildListTile(String title, IconData icon){
               ),),
             ),
             SizedBox(height: 20,),
-            buildListTile('Inventory', Icons.book),
+            buildListTile(
+              'Inventory', 
+              Icons.book,
+              () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed('/inventory');
+            }),
         ],
       ),
       );

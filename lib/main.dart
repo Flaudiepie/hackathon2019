@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hackathon2019/barcode_scanner.dart';
 import 'package:hackathon2019/drawer.dart';
+import 'package:hackathon2019/inventory_screen.dart';
 
 
 void main() => runApp(MyApp());
@@ -14,7 +15,10 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.white
       ),
       title: 'Hackathon 2019',
-      home: WelcomeScreen()
+      home: WelcomeScreen(),
+      routes: {
+        '/inventory': (ctx) => InventoryMainScreen()
+      },
     );
   }
 }
