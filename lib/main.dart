@@ -22,25 +22,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-class WelcomeScreen extends StatefulWidget {
-  @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
-}
-
-class _WelcomeScreenState extends State<WelcomeScreen> {
-
-  String barcode = "";
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: MyDrawer(),
-        appBar: AppBar(),
-        body: Center(
-          child: Text('Homepage'),
-        ),
-        floatingActionButton: ScanCodeButton(),
-      );
-  }
-}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon2019/barcode_scanner.dart';
 import 'package:hackathon2019/drawer.dart';
 import 'package:hackathon2019/inventoryItemTemplate.dart';
 import 'package:hackathon2019/model/dummy_data.dart';
@@ -20,12 +21,13 @@ class _InventoryMainScreenState extends State<InventoryMainScreen> {
         (invData) => InventoryItem(invData.name)
         ).toList(),
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 200,
+        maxCrossAxisExtent: 150,
         childAspectRatio: 3 / 2,
-        crossAxisSpacing: 20,
-        mainAxisSpacing: 20,
+        crossAxisSpacing: 5,
+        mainAxisSpacing: 5,
       ),
       ),
+      floatingActionButton: ScanCodeButton(),
     );
   }
 }

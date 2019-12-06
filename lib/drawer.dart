@@ -40,6 +40,13 @@ Widget buildListTile(String title, IconData icon, Function tabHandler){
                 Navigator.of(context).pop();
                 Navigator.of(context).pushNamed('/inventory');
             }),
+            buildListTile(
+              'Shopping List', 
+              Icons.shopping_basket,
+               () {
+                 
+               }
+              )
         ],
       ),
       );

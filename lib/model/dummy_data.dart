@@ -58,6 +58,6 @@ const DUMMY_DATA = const [
 
       InventoryProduct(
       id: 11, 
-      name: 'Your mom gay',
+      name: 'Tea',
       ),
 ];
