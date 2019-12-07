@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:barcode_scan/barcode_scan.dart';
+//import 'package:barcode_scan/barcode_scan.dart';
 
 class ScanCodeButton extends StatefulWidget {
   @override
@@ -26,7 +26,7 @@ class _ScanCodeButtonState extends State<ScanCodeButton> {
             ),
             onPressed: () async {
               try{
-                String barcode = await BarcodeScanner.scan();
+               // String barcode = await BarcodeScanner.scan();
                 this.barcode = barcode;
               } on PlatformException catch(e){ }
             },

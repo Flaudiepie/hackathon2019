@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hackathon2019/barcode_scanner.dart';
 import 'package:hackathon2019/drawer.dart';
@@ -10,6 +11,9 @@ class InventoryMainScreen extends StatefulWidget {
 }
 
 class _InventoryMainScreenState extends State<InventoryMainScreen> {
+
+  final databaseReference = Firestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +31,21 @@ class _InventoryMainScreenState extends State<InventoryMainScreen> {
         mainAxisSpacing: 5,
       ),
       ),
-      floatingActionButton: ScanCodeButton(),
+      floatingActionButton: RaisedButton(
+        child: Text("Db Test"),
+        onPressed: () {
+          getData();
+        },
+        ),
     );
+  }
+
+  void getData() {
+    databaseReference
+        .collection("inventory")
+        .getDocuments()
+        .then((QuerySnapshot snapshot) {
+      snapshot.documents.forEach((f) => print('${f.data}}'));
+    });
   }
 }

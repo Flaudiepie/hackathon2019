@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "696170528621",
+    "firebase_url": "https://hackathon2019bestproject.firebaseio.com",
+    "project_id": "hackathon2019bestproject",
+    "storage_bucket": "hackathon2019bestproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696170528621:android:a0730cccb06c4db89b2464",
+        "android_client_info": {
+          "package_name": "de.genite.finv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "696170528621-llrg0paj98geipsb71jtckvul1qjkef2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0zm7SsFO6Gua5bii3H8g8nqDdOu7J4nc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "696170528621-llrg0paj98geipsb71jtckvul1qjkef2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "696170528621-p74387p6nboqdv19groemepquv37jfb6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "de.microp.finv"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
