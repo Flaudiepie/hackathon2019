@@ -31,12 +31,7 @@ class _InventoryMainScreenState extends State<InventoryMainScreen> {
         mainAxisSpacing: 5,
       ),
       ),
-      floatingActionButton: RaisedButton(
-        child: Text("Db Test"),
-        onPressed: () {
-          getData();
-        },
-        ),
+      floatingActionButton: ScanCodeButton()
     );
   }
 

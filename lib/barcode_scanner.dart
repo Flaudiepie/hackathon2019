@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hackathon2019/model/barcodeInfo.dart';
 //import 'package:barcode_scan/barcode_scan.dart';
 
 class ScanCodeButton extends StatefulWidget {
@@ -20,14 +21,13 @@ class _ScanCodeButtonState extends State<ScanCodeButton> {
              fillColor: Theme.of(context).primaryColor,
              elevation: 0.0,
              child: new Icon(
-               Icons.camera_alt,
+               Icons.add,
                color: Theme.of(context).accentColor,
                size: 30,
             ),
             onPressed: () async {
               try{
-               // String barcode = await BarcodeScanner.scan();
-                this.barcode = barcode;
+               //WIP
               } on PlatformException catch(e){ }
             },
             ),
