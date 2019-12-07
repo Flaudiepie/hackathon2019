@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon2019/inventory_screen.dart';
 
 class MyDrawer extends StatelessWidget {
 

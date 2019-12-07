@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:hackathon2019/barcode_scanner.dart';
-import 'package:hackathon2019/drawer.dart';
-import 'package:hackathon2019/inventoryItemTemplate.dart';
 import 'package:hackathon2019/model/dummy_data.dart';
+
+import 'barcode_scanner.dart';
+import 'drawer.dart';
+import 'inventoryItemTemplate.dart';
 
 class InventoryMainScreen extends StatefulWidget {
   @override

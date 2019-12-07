@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hackathon2019/model/barcodeInfo.dart';
+import 'package:../hackathon2019/model/barcodeInfo.dart';
+
 //import 'package:barcode_scan/barcode_scan.dart';
 
 class ScanCodeButton extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon2019/InventoryDetailScreen.dart';
+import 'InventoryDetailScreen.dart';
 
 class InventoryItem extends StatelessWidget {
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon2019/barcode_scanner.dart';
-import 'package:hackathon2019/drawer.dart';
-import 'package:hackathon2019/inventory_screen.dart';
+
+import 'views/inventory_screen.dart';
 
 
 void main() => runApp(MyApp());
