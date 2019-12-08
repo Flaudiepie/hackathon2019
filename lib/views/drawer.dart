@@ -12,6 +12,21 @@ Widget buildListTile(String title, IconData icon, Function tabHandler){
               ); 
 }
 
+void executeRouteChange(BuildContext context ,String newPage){
+
+Navigator.popUntil(context, (route) {
+  if (route.settings.name != newPage) {
+    Navigator.of(context).pop();
+    Navigator.of(context).pushNamed(newPage);
+  }
+  else{
+    Navigator.of(context).pop();
+  }
+  return true;
+});
+
+}
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -36,8 +51,7 @@ Widget buildListTile(String title, IconData icon, Function tabHandler){
               'Inventory', 
               Icons.book,
               () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pushNamed('/inventory');
+                executeRouteChange(context, '/');
             }),
             buildListTile(
               'Shopping List', 

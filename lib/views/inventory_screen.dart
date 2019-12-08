@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hackathon2019/model/dummy_data.dart';
 
-import 'barcode_scanner.dart';
+import 'create_product.dart';
 import 'drawer.dart';
 import 'inventoryItemTemplate.dart';
 
@@ -19,7 +19,7 @@ class _InventoryMainScreenState extends State<InventoryMainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MyDrawer(),
-        appBar: AppBar(),
+        appBar: AppBar(title: Text('Inventory'),),
         body:
       GridView(
       children: DUMMY_DATA.map(
@@ -32,7 +32,7 @@ class _InventoryMainScreenState extends State<InventoryMainScreen> {
         mainAxisSpacing: 5,
       ),
       ),
-      floatingActionButton: ScanCodeButton()
+      floatingActionButton: AddItemButton()
     );
   }
 
