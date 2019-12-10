@@ -3,7 +3,6 @@ import 'package:hackathon2019/views/create_product.dart';
 
 import 'views/inventory_screen.dart';
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
