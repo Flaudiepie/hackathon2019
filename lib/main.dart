@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Hackathon 2019',
       home: InventoryMainScreen(),
       routes: {
-        '/add': (ctx) => AddProductScreen(),
+        '/add': (ctx) => ProductDetails(),
       },
     );
   }
