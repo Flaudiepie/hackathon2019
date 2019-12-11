@@ -1,4 +1,4 @@
-package com.example.hackathon2019
+package de.genite.finv
 
 import android.os.Bundle
 

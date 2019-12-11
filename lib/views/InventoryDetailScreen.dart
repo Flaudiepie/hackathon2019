@@ -100,7 +100,7 @@ Container buildDetailScreen(Item item) {
                 ),
                 item.alcohol != null
                     ? Text(
-                        '${item.alcohol} g',
+                        '${item.alcohol} %',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       )

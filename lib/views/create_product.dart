@@ -26,7 +26,8 @@ class AddItemButton extends StatelessWidget {
           size: 30,
         ),
         onPressed: () async {
-          barcode = await BarcodeScanner.scan();
+         // barcode = await BarcodeScanner.scan();
+         barcode = "3057640376498";
           Navigator.of(context).pushNamed('/add');
         },
       ),
