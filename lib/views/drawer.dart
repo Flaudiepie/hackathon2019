@@ -53,13 +53,6 @@ Navigator.popUntil(context, (route) {
               () {
                 executeRouteChange(context, '/');
             }),
-            buildListTile(
-              'Shopping List', 
-              Icons.shopping_basket,
-               () {
-                 
-               }
-              )
         ],
       ),
       );

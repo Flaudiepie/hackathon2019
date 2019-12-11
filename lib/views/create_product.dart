@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'dart:async';
 import 'package:../hackathon2019/model/barcodeInfo.dart';
 import 'package:barcode_scan/barcode_scan.dart';
-import 'package:hackathon2019/model/addItem.dart';
+import 'package:hackathon2019/model/database.dart';
 import 'package:hackathon2019/model/item.dart';
 import 'package:intl/intl.dart';
 
@@ -26,8 +26,7 @@ class AddItemButton extends StatelessWidget {
           size: 30,
         ),
         onPressed: () async {
-          //  var barcode = await BarcodeScanner.scan();
-          barcode = '3057640376498';
+          barcode = await BarcodeScanner.scan();
           Navigator.of(context).pushNamed('/add');
         },
       ),
@@ -94,7 +93,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   final alcoholFocus = new FocusNode();
   final sizeFocus = new FocusNode();
   var dateController = new TextEditingController();
-  DateTime chosenDate;
+  DateTime chosenDate = DateTime.now();
   final form = GlobalKey<FormState>();
   var item = Item(
       barcode: barcode,
@@ -104,7 +103,7 @@ class _ProductDetailsState extends State<ProductDetails> {
       calories: 0,
       date: DateTime.now(),
       fat: 0,
-      size: 0);
+      size: '');
 
   Product product;
   dynamic initValues;
@@ -123,11 +122,11 @@ class _ProductDetailsState extends State<ProductDetails> {
               'barcode': barcode,
               'brand': product.brand_name,
               'productName': product.name,
-              'alcohol':  checkForNull(product.alcohol_by_volume),
+              'alcohol': checkForNull(product.alcohol_by_volume),
               'calories': checkForNull(product.calories),
               'date': new DateFormat.yMMMd().format(DateTime.now()),
               'fat': checkForNull(product.fat),
-              'size': removeUnit(product.size)
+              'size': checkForNull(null ,product.size),
             };
           })
         });
@@ -148,8 +147,12 @@ class _ProductDetailsState extends State<ProductDetails> {
   }
 
   void saveData() {
-    form.currentState.save();
-    addItem(item);
+    if (form.currentState.validate()) {
+      form.currentState.save();
+      addElement(item);
+      Navigator.of(context).pop();
+    }
+    return;
   }
 
   @override
@@ -162,6 +165,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           ? Padding(
               padding: const EdgeInsets.all(20.0),
               child: Form(
+                autovalidate: true,
                 key: form,
                 child: ListView(
                   children: <Widget>[
@@ -230,12 +234,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                       },
                     ),
                     TextFormField(
-                      initialValue: initValues['date'],
+                      controller: dateController,
                       readOnly: true,
                       onTap: () {
                         showDatePicker(
                           context: context,
-                          initialDate: DateTime.now(),
+                          initialDate: chosenDate,
                           firstDate: DateTime(2000),
                           lastDate: DateTime(2999),
                           builder: (BuildContext context, Widget child) {
@@ -275,10 +279,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                       },
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: 'Calories (not required)',
-                        icon: Icon(Icons.cake),
-                      ),
+                          labelText: 'Calories (not required)',
+                          icon: Icon(Icons.cake),
+                          errorStyle: TextStyle(color: Colors.orange)),
                       maxLength: 10,
+                      validator: (value) {
+                        return checkInput(value);
+                      },
                       onSaved: (value) {
                         item = Item(
                             barcode: item.barcode,
@@ -304,6 +311,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                         icon: Icon(Icons.fastfood),
                       ),
                       maxLength: 10,
+                      validator: (value) {
+                        return checkInput(value);
+                      },
                       onSaved: (value) {
                         item = Item(
                             barcode: item.barcode,
@@ -329,6 +339,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                         labelText: 'Alcohol (not required)',
                         icon: Icon(Icons.local_drink),
                       ),
+                      validator: (value) {
+                        return checkPercentageInput(value);
+                      },
                       onSaved: (value) {
                         item = Item(
                             barcode: item.barcode,
@@ -350,7 +363,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         labelText: 'Set size (not required)',
                         icon: Icon(Icons.arrow_upward),
                       ),
-                      maxLength: 10,
+                      maxLength: 15,
                       onSaved: (value) {
                         item = Item(
                             barcode: item.barcode,
@@ -360,7 +373,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             calories: item.calories,
                             date: item.date,
                             fat: item.fat,
-                            size: parseToDouble(value));
+                            size: value);
                       },
                       onFieldSubmitted: (_) {
                         saveData();
@@ -377,47 +390,72 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ),
               ),
             ),
+            floatingActionButton: product != null ? submitButton(
+              context, 
+              () {
+                saveData();
+              })
+              :
+              null
     );
   }
 
-  double parseToDouble(String input){
+  String checkPercentageInput(String input) {
+    if (input.isNotEmpty) {
+      try {
+        var toCheck = double.parse(input);
+        if (toCheck > 100.99) {
+          return 'Entered value is higher than 100%!';
+        }
+        return null;
+      } catch (e) {
+        return 'Invalid format!';
+      }
+    }
+    return null;
+  }
+
+  String checkInput(String input) {
+    if (input.isNotEmpty) {
+      try {
+        double.parse(input);
+        return null;
+      } catch (e) {
+        return 'Invalid format!';
+      }
+    }
+    return null;
+  }
+
+  double parseToDouble(String input) {
     return double.tryParse(input);
   }
 
-  String checkForNull(double input){
-    if(input != null){
-      return input.toString();
+  String checkForNull(double input, [String stringInput]) {
+    if (input != null) {      
+      return input.toString().replaceAll(',', '.');
+    }
+    else if(stringInput != null){
+      return stringInput;
     }
     return '';
   }
 
-  String removeUnit(String input){
-    if(input.isNotEmpty){
-    try
-    {
-      int.parse(input[input.length - 1]);
-      return input;
-    }
-    catch(e)
-    {
-      return input.substring(0, input.length - 1);
-    }
+  String removeUnit(String input) {
+    RegExp pattern = new RegExp(r"/^[0-9]+(\\.[0-9]+)?$");
+    if (input.isNotEmpty) {
+      input = input.replaceAll(',', '.');
+      do {
+        try {
+          int.parse(input[input.length - 1]);
+          return input;
+        } catch (e) {
+          input = input.substring(0, input.length - 1);
+        }
+      } while (!pattern.hasMatch(input));
     }
     return input;
   }
-
-  // void submitData() {}
-
-  // void checkPercentageInput(String input) {
-  //   try {
-  //     var toCheck = double.parse(input);
-  //     if (toCheck > 100.99) {
-  //       alcoholController.text = "";
-  //     }
-  //   } catch (e) {
-  //     alcoholController.text = "";
-  //   }
-  // }
 }
 
 Widget submitButton(BuildContext context, Function function) {

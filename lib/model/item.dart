@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Item {
+  @required int id;
   @required String barcode; 
   @required String brand;
   @required String productName; 
@@ -8,12 +9,13 @@ class Item {
   double calories; 
   double fat; 
   double alcohol;
-  double size;
+  String size;
 
   Item({
     @required this.barcode,
     @required this.brand,
     @required this.productName,
+    this.id = 0,
     this.date,
     this.calories,
     this.fat,

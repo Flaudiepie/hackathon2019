@@ -1,25 +1,41 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:hackathon2019/model/item.dart';
 import 'InventoryDetailScreen.dart';
 
 class InventoryItem extends StatelessWidget {
 
-  final String title;
+  final String barcode;
+  final String brand;
+  final String productName;
+  final Timestamp date;
+  final double calories;
+  final double fat;
+  final double alcohol;
+  final String size;
+  Item item;
 
   InventoryItem(
-    this.title,
-  );
+      this.barcode,
+      this.brand,
+      this.productName,
+      this.date,
+      this.calories,
+      this.fat,
+      this.alcohol,
+      this.size){
+        item = Item(barcode: barcode, brand: brand, productName: productName, alcohol: alcohol, calories: calories,date: date.toDate(), fat: fat, size: size);
+      }
 
-void onItemPressed(BuildContext context ) {
-
+  void onItemPressed(BuildContext context) {
     showModalBottomSheet(
-
         context: context,
         builder: (context) {
           return Container(
             color: Color(0xFF737373),
             height: 350,
             child: Container(
-              child: buildDetailScreen(title),
+              child: buildDetailScreen(item),
               decoration: BoxDecoration(
                 color: Theme.of(context).canvasColor,
                 borderRadius: BorderRadius.only(
@@ -34,25 +50,20 @@ void onItemPressed(BuildContext context ) {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        onItemPressed(context);
-        },
-      splashColor: Theme.of(context).primaryColor,
-      borderRadius: BorderRadius.circular(15),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 2.0, 0, 2.0),
       child: Container(
-        margin: EdgeInsets.all(5),
-        child: Center(
-        child:
-          Text(title, style: TextStyle(
-          color: Colors.black,
-          fontSize: 18 )
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
         ),
-      ),
-      decoration: BoxDecoration(
-        color: Colors.black12,
-        borderRadius: BorderRadius.circular(15),
-      ),
+        child: ListTile(
+          onTap: () {
+            onItemPressed(context);
+          },
+          leading: Icon(Icons.play_arrow),
+          title: Text(productName),
+          subtitle: Text(brand),
+        ),
       ),
     );
   }
